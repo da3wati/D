@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eee2d1">
+  <meta property="og:title" content="Famille Laichi — Mariage de Dady">
+  <meta property="og:description" content="Au plaisir de partager ce bonheur avec vous.">
+  <meta property="og:type" content="website">
+  <title>Famille Laichi — Le mariage de Dady</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #b18a4b;
+      --gold-dark: #8c6a35;
+      --ivory: #f7f0e6;
+      --ink: #40372e;
+      --muted: #796b5b;
+      --glass: rgba(239, 225, 207, .62);
+      --line: rgba(177, 138, 75, .58);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--ink); font-family: "Cormorant Garamond", Georgia, serif;
+      background: #e8dac8 url("background.jpg") center center / auto 104% fixed no-repeat;
+      min-height: 100vh; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -1;
+      background: linear-gradient(180deg, rgba(255,250,242,.12), rgba(225,207,183,.12));
+      pointer-events: none;
+    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .cover {
+      min-height: 100svh; display: grid; place-items: stretch; padding: 0;
+      position: relative; isolation: isolate; overflow: hidden;
+      background: linear-gradient(180deg, rgba(250,245,237,.2), rgba(223,204,178,.26));
+      cursor: pointer;
+    }
+    .cover::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: url("envelope.jpg") center / cover no-repeat;
+      filter: saturate(.92);
+    }
+    .cover-shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,250,244,.08),rgba(94,69,39,.16)); }
+    .cover-image-button {
+      position: absolute; inset: 0; z-index: 2; display: block; width: 100%; height: 100%;
+      padding: 0; border: 0; margin: 0; background: transparent; cursor: pointer;
+      appearance: none;
+    }
+    .cover-image-button:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: -5px; }
+    .invitation { display:none; opacity:0; }
+    .invitation.visible { display:block; animation: pageReveal 1.15s ease forwards; }
+    @keyframes pageReveal { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+    .music-control {
+      position:fixed; z-index:20; right:16px; bottom:16px; width:48px; height:48px;
+      border-radius:50%; border:1px solid var(--line); background:rgba(250,244,234,.9);
+      color:var(--gold-dark); box-shadow:0 4px 18px #4c39201c; cursor:pointer;
+      display:none; place-items:center; font: 1.1rem Arial,sans-serif; backdrop-filter:blur(8px);
+    }
+    .music-control.show { display:grid; }
+    .music-control .music-label { position:absolute; right:57px; white-space:nowrap; font: .95rem "Cormorant Garamond",serif; color:#5d4930; background:rgba(250,244,234,.88); padding:5px 9px; border-radius:20px; }
+    .section {
+      width:min(760px, calc(100% - 30px)); margin:24px auto; padding:clamp(25px, 6vw, 48px) clamp(17px, 5vw, 42px);
+      background:var(--glass); border:1px solid rgba(255,250,241,.58); border-radius:18px;
+      box-shadow:0 12px 34px rgba(77,56,31,.09); backdrop-filter:blur(3px);
+      text-align:center; position:relative; overflow:hidden;
+    }
+    .section::before { content:""; position:absolute; inset:8px; border:1px solid rgba(177,138,75,.23); border-radius:12px; pointer-events:none; }
+    .eyebrow { font-size:clamp(1rem,3vw,1.2rem); text-transform:uppercase; letter-spacing:.2em; color:var(--gold-dark); margin:0 0 13px; }
+    h1,h2,p { position:relative; }
+    .family { margin:0; color:#87652f; font-size:clamp(2.5rem, 8vw, 4.6rem); line-height:1; font-weight:500; letter-spacing:.035em; }
+    .intro-line { font-size:clamp(1.2rem,4vw,1.55rem); margin:20px 0 7px; color:#57483a; }
+    .groom { margin:0; font-size:clamp(2.6rem, 9vw, 4.2rem); color:#a27c3f; font-weight:500; line-height:1.05; }
+    .divider { width:110px; height:1px; margin:25px auto; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .verse { max-width:650px; margin:0 auto; font-family:"Amiri",serif; font-size:clamp(1.25rem,4.5vw,1.8rem); line-height:2; color:#6e532b; direction:rtl; }
+    .verse-ref { margin:8px 0 0; color:#8b6a3a; font-size:1rem; letter-spacing:.04em; }
+    .countdown { display:flex; justify-content:center; align-items:flex-start; gap:clamp(9px,3vw,28px); margin-top:26px; flex-wrap:wrap; }
+    .time-part { min-width:60px; }
+    .time-value { font-size:clamp(2rem,7vw,3.3rem); color:#a77f3d; font-weight:500; line-height:1; font-variant-numeric:tabular-nums; }
+    .time-label { margin-top:9px; color:#675744; font-size:clamp(.85rem,2.8vw,1.05rem); letter-spacing:.04em; }
+    .hall-image { width:100%; max-height:470px; object-fit:cover; display:block; border:1px solid var(--gold); border-radius:12px; padding:5px; background:rgba(255,249,239,.45); box-shadow:0 8px 24px rgba(70,47,23,.12); }
+    .venue-title { margin:0 0 10px; color:#8f6b36; font-size:clamp(1.8rem,6vw,2.4rem); font-weight:500; }
+    .venue-name { margin:0; font-size:clamp(1.25rem,4.5vw,1.65rem); }
+    .venue-place { margin:6px 0 24px; font-size:1.15rem; color:var(--muted); }
+    .map-actions { display:flex; flex-direction:column; justify-content:center; align-items:center; gap:16px; margin-top:24px; }
+    .qr-frame { width:150px; height:150px; padding:10px; background:rgba(255,250,242,.85); border:1px solid var(--gold); border-radius:10px; display:grid; place-items:center; }
+    .qr-frame img { width:100%; height:100%; display:block; }
+    .gold-button {
+      display:inline-flex; justify-content:center; align-items:center; gap:8px; min-height:45px;
+      padding:11px 20px; border-radius:999px; border:1px solid var(--gold);
+      background:rgba(255,248,237,.72); color:#795a2f; text-decoration:none;
+      font:500 1.1rem "Cormorant Garamond",serif; cursor:pointer; transition:background .2s,transform .2s;
+    }
+    .gold-button:hover { background:rgba(255,250,242,.96); transform:translateY(-1px); }
+    .closing { color:#87652f; font-size:clamp(1.5rem,5vw,2rem); font-style:italic; line-height:1.35; margin:0 auto 18px; max-width:560px; }
+    .closing-family { color:#9a753b; font-size:1.5rem; letter-spacing:.08em; margin:0; }
+    .share-note { margin:14px 0 0; font-size:.95rem; color:var(--muted); }
+    .footer-space { height:20px; }
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease; }
+    .reveal.in-view { opacity:1; transform:translateY(0); }
+    @media (max-width:520px) {
+      body { background-attachment:fixed; background-size:auto 104%; background-position:center center; }
+      .section { margin:14px auto; padding:30px 17px; border-radius:15px; }
+      .section::before { inset:6px; }
+      .qr-frame { width:132px; height:132px; }
+      .map-actions { gap:14px; }
+      .cover-hint { bottom:5vh; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="cover" id="cover" aria-label="Enveloppe de l’invitation">
+      <div class="cover-shade" aria-hidden="true"></div>
+      <button class="cover-image-button" id="openInvitation" type="button" aria-label="Ouvrir l’invitation en touchant l’image"></button>
+    </section>
+
+    <div class="invitation" id="invitation" aria-hidden="true">
+      <section class="section reveal">
+        <p class="eyebrow">Vous invitent à célébrer</p>
+        <h1 class="family">Famille Laichi</h1>
+        <p class="intro-line">Le mariage de notre fils</p>
+        <h2 class="groom">Dady</h2>
+        <div class="divider"></div>
+        <p class="intro-line">Au plaisir de partager ce bonheur avec vous</p>
+      </section>
+
+      <section class="section reveal">
+        <p class="eyebrow">Une union, une promesse</p>
+        <p class="verse">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنْفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p>
+        <p class="verse-ref">سورة الروم — الآية ٢١</p>
+      </section>
+
+      <section class="section reveal">
+        <p class="eyebrow">Le grand jour approche</p>
+        <h2 class="venue-title">27 octobre 2026</h2>
+        <div class="divider"></div>
+        <div class="countdown" id="countdown" aria-label="Compte à rebours">
+          <div class="time-part"><div class="time-value" id="days">--</div><div class="time-label">Jours</div></div>
+          <div class="time-part"><div class="time-value" id="hours">--</div><div class="time-label">Heures</div></div>
+          <div class="time-part"><div class="time-value" id="minutes">--</div><div class="time-label">Minutes</div></div>
+          <div class="time-part"><div class="time-value" id="seconds">--</div><div class="time-label">Secondes</div></div>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <p class="eyebrow">Le lieu de célébration</p>
+        <h2 class="venue-title">Salle Bouslimani</h2>
+        <p class="venue-place">El Affroun, Blida — Algérie</p>
+        <img class="hall-image" src="hall.jpg" alt="Décoration élégante de la salle de réception" loading="lazy">
+        <div class="map-actions">
+          <div class="qr-frame"><img id="mapQr" alt="QR code pour ouvrir l'itinéraire vers la salle" loading="lazy"></div>
+          <a class="gold-button" href="https://maps.app.goo.gl/mrUgy2rxZPKUqsMq7" target="_blank" rel="noopener noreferrer">⌖ &nbsp; Voir l’itinéraire</a>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <p class="closing">Au plaisir de partager ce bonheur avec vous</p>
+        <p class="closing-family">Famille Laichi</p>
+        <div class="divider"></div>
+        <button class="gold-button" id="shareInvitation" type="button">Partager l’invitation</button>
+        <p class="share-note" id="shareNote" aria-live="polite"></p>
+      </section>
+      <div class="footer-space"></div>
+    </div>
+  </main>
+
+  <audio id="invitationMusic" src="music.mp3" preload="none" loop></audio>
+  <button class="music-control" id="musicControl" type="button" aria-label="Mettre la musique en pause" title="Musique">
+    <span id="musicIcon" aria-hidden="true">Ⅱ</span><span class="music-label" id="musicLabel">Musique</span>
+  </button>
+
+  <script>
+    const mapUrl = "https://maps.app.goo.gl/mrUgy2rxZPKUqsMq7";
+    const cover = document.getElementById("cover");
+    const invitation = document.getElementById("invitation");
+    const openButton = document.getElementById("openInvitation");
+    const music = document.getElementById("invitationMusic");
+    const musicControl = document.getElementById("musicControl");
+    const musicIcon = document.getElementById("musicIcon");
+    const musicLabel = document.getElementById("musicLabel");
+    const shareNote = document.getElementById("shareNote");
+    let opened = false;
+
+    // QR is generated from the supplied Google Maps link.
+    document.getElementById("mapQr").src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&color=9b783d&bgcolor=fffaf2&data=" +
+      encodeURIComponent(mapUrl);
+
+    function updateMusicButton() {
+      const playing = !music.paused;
+      musicIcon.textContent = playing ? "Ⅱ" : "▶";
+      musicControl.setAttribute("aria-label", playing ? "Mettre la musique en pause" : "Lire la musique");
+      musicLabel.textContent = playing ? "Pause" : "Lecture";
+    }
+
+    openButton.addEventListener("click", async () => {
+      if (opened) return;
+      opened = true;
+      cover.style.transition = "opacity 850ms ease, transform 850ms ease";
+      cover.style.opacity = "0";
+      cover.style.transform = "scale(1.015)";
+      invitation.classList.add("visible");
+      invitation.setAttribute("aria-hidden", "false");
+      musicControl.classList.add("show");
+      try {
+        await music.play();
+      } catch (error) {
+        // If playback is blocked or music.mp3 is missing, the visitor can tap the music control.
+        console.info("La musique n'a pas pu démarrer. Utilisez le bouton musique.", error);
+      }
+      updateMusicButton();
+      window.setTimeout(() => {
+        cover.style.display = "none";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        revealObserver.observeAll?.();
+      }, 860);
+    });
+
+    musicControl.addEventListener("click", async () => {
+      if (music.paused) {
+        try { await music.play(); } catch (error) { console.info("Lecture audio impossible.", error); }
+      } else {
+        music.pause();
+      }
+      updateMusicButton();
+    });
+
+    music.addEventListener("play", updateMusicButton);
+    music.addEventListener("pause", updateMusicButton);
+
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealItems.forEach(item => revealObserver.observe(item));
+
+    // Local event date: 27 October 2026 at midnight, with no event time displayed.
+    const eventDate = new Date(2026, 9, 27, 0, 0, 0);
+    const pad = number => String(number).padStart(2, "0");
+    function updateCountdown() {
+      const difference = eventDate.getTime() - Date.now();
+      if (difference <= 0) {
+        document.getElementById("countdown").innerHTML =
+          '<p class="intro-line">Le grand jour est arrivé !</p>';
+        return;
+      }
+      const days = Math.floor(difference / 86400000);
+      const hours = Math.floor((difference % 86400000) / 3600000);
+      const minutes = Math.floor((difference % 3600000) / 60000);
+      const seconds = Math.floor((difference % 60000) / 1000);
+      document.getElementById("days").textContent = String(days);
+      document.getElementById("hours").textContent = pad(hours);
+      document.getElementById("minutes").textContent = pad(minutes);
+      document.getElementById("seconds").textContent = pad(seconds);
+    }
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
+
+    document.getElementById("shareInvitation").addEventListener("click", async () => {
+      const shareData = {
+        title: "Famille Laichi — Le mariage de Dady",
+        text: "Au plaisir de partager ce bonheur avec vous.",
+        url: window.location.href
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(window.location.href);
+          shareNote.textContent = "Lien de l’invitation copié.";
+        } else {
+          shareNote.textContent = "Copiez le lien depuis la barre d’adresse de votre navigateur.";
+        }
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          shareNote.textContent = "Vous pouvez copier le lien depuis la barre d’adresse.";
+        }
+      }
+    });
+  </script>
+</body>
+</html>
